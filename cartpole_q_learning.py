@@ -14,7 +14,7 @@ from IPython import display as i_python_display
 
 
 class MyEnvironment:
-    def __init__(self, environment_name: str, action = None, observation = None):
+    def __init__(self, environment_name: str, action = None, observation = None) -> None:
         self.environment_name = environment_name
         self.environment = gym.make(self.environment_name)
         self.action = action
@@ -53,7 +53,7 @@ class MyEnvironment:
         return [self.environment.horizon + 1]
 
 
-    def set_observation(self, observation):
+    def set_observation(self, observation) -> None:
         self.observation = observation
         if 'CartPole' in self.environment_name:
             # discretize the observation
@@ -83,8 +83,8 @@ class MyEnvironment:
 
 
 class Agent:
-    def __init__(self, action_space, action_space_length, \
-        observation_space, observation_space_length, \
+    def __init__(self, action_space: gym.spaces.Discrete, action_space_length, \
+        observation_space: gym.spaces.Discrete, observation_space_length, \
             n_episodes: int, learning_rate: float, gamma: float):
         
         self.action_space = action_space 
