@@ -1,4 +1,4 @@
-# CartPole_Q_Learning
+# CartPole_Q-Learning
 Balancing CartPole-v1 from OpenAI Gym by means of Reinforcement Learning, 
 specifically employing Epsilon-Greedy strategy for Q-Learning.
 Refer to q_learning.pdf for more information about
