@@ -4,8 +4,6 @@ specifically employing Epsilon-Greedy strategy for Q-Learning.
 Refer to q_learning.pdf for more information about
 Q-Learning.
 
-
-
 # CartPole_Genetic
 Genetic Algorithm/ Neural Network implementation for 
 balancing CartPole-v1 from OpenAI Gym, based on 
