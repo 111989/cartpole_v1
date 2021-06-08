@@ -251,8 +251,10 @@ def main():
     plot_statistics(running_accuracy, running_delta)
 
 
+    
 
 if __name__ == "__main__":
+    
     #parse input arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('--episodes', type = int, default = 10000, \
@@ -261,12 +263,11 @@ if __name__ == "__main__":
         help = 'Learning rate')
     parser.add_argument('--gamma', type = float, default = 0.95, \
         help = 'Gamma parameter')
+    
     args = vars(parser.parse_args())
-
     n_episodes = int(args['episodes'])
     learning_rate = float(args['alpha'])
     gamma = float(args['gamma'])
 
 
     main()
-    
