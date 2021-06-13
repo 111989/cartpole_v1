@@ -24,7 +24,6 @@ class MyEnvironment:
                     np.linspace(-0.418, 0.418, self.n_bins), \
                         np.linspace(-4, 4, self.n_bins)]
 
-
     def get_environment_name(self) -> str: 
         """Returns the name of the environment"""
         return self.environment.unwrapped.spec.id 
