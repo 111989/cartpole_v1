@@ -163,9 +163,6 @@ def main():
     running_length = 5 
     running_delta, running_accuracy = [], [] 
     render_gym = True
-    
-    
-    
     for episode_index in range(n_episodes):
         """
             Track the number of episodes completed
@@ -191,8 +188,6 @@ def main():
                     environment.display_environment()
                     i_python_display.clear_output(wait = True)
                     i_python_display.display(plt.gcf())
-
-                    
                     
             action = agent.act(observation, episode_index) 
             environment.action = action
@@ -204,8 +199,6 @@ def main():
                 next_observation, reward)) 
 
             observation = next_observation 
-
-            
             
             optimal_actions += int(reward > 0.0)
             episode_count += 1
