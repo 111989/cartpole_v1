@@ -192,11 +192,11 @@ def main():
     
     # initialize gym environment
     environment = MyEnvironment('CartPole-v1')
-
     # get inputs for agents from the environment and generate agents
     observation_space = environment.get_observation_space().shape[0] # 4 
     action_space_length = environment.get_action_space().n # 2 (Left or Right)
     population = Population(observation_space, action_space_length, population_count, mutation_rate)
+    
     running_accuracy = []
     render_gym = True
     for generation in range(generations):
