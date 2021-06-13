@@ -81,9 +81,7 @@ class Agent:
         self.fitness = 0
 
     def act(self, observation: int) -> int: 
-        """
-            Returns Agent's action based on input 
-            observation"""
+        """Returns Agent's action based on input observation"""
 
         def sigmoid(x):
             """Activation function of neurons"""
