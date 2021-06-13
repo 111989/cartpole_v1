@@ -138,20 +138,17 @@ def plot_statistics(running_accuracy, running_delta):
 def main():
     
     np.random.seed(111989)
-    
     # display once in every 100 episodes 
     DISPLAY_FREQUENCY = 100 
 
     # create and reset environment
     environment = MyEnvironment('CartPole-v1')
     environment.reset()
-
     # get inputs for agent from the environment
     action_space = environment.get_action_space()
     action_space_length = environment.get_action_space_length()
     observation_space = environment.get_observation_space()
     observation_space_length = environment.get_observation_space_length()
-
     # create agent
     agent = Agent(action_space, action_space_length, observation_space, \
         observation_space_length, n_episodes, learning_rate, gamma)
@@ -174,12 +171,10 @@ def main():
         episode_count = 1 
         optimal_actions = 0  
         delta_update = [] 
-
         # get the initial observation 
         observation = environment.reset()
         environment.set_observation(observation)
         observation = environment.observation 
-
         done = False
         while not done:
             # display performance
@@ -194,10 +189,8 @@ def main():
             next_observation, reward, done, _ = environment.step()
             environment.set_observation(next_observation)
             next_observation = environment.observation
-
             delta_update.append(agent.update(observation, action, \
-                next_observation, reward)) 
-
+                next_observation, reward))
             observation = next_observation 
             
             optimal_actions += int(reward > 0.0)
@@ -206,11 +199,9 @@ def main():
         # compute performance statistics and display performance
         running_delta.append(sum(delta_update).item()) # latest update
         running_accuracy.append(optimal_actions/episode_count) # latest accuracy
-
         print('episode = {}, epsilon = {}, cumulative delta = {}, accuracy = {} \n'\
             .format(episode_index, agent.epsilon[episode_index], \
                 running_delta[episode_index], running_accuracy[-1]))
-
         if (episode_index >= n_episodes + running_length ) or \
             (all([accuracy == 1.0 for accuracy in running_accuracy]) and \
                 all([delta < 0.0001 for delta in running_delta]) and \
@@ -218,7 +209,6 @@ def main():
 
     i_python_display.clear_output(wait = True)
     environment.close() 
-
     # plot performance statistics
     plot_statistics(running_accuracy, running_delta)
 
