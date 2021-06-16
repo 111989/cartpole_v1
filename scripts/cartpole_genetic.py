@@ -9,6 +9,7 @@ import numpy as np
 from bisect import bisect_right
 import matplotlib.pyplot as plt
 
+
 class MyEnvironment:
     def __init__(self, environment_name: str, action = None, observation = None) -> None:
 
