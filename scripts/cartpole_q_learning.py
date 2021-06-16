@@ -1,3 +1,6 @@
+""" Balancing CartPole-v1 from OpenAI Gym by employing 
+    Epsilon-Greedy strategy for Q-Learning """
+
 import gym
 import argparse
 import numpy as np
