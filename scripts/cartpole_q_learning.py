@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from IPython import display as i_python_display
 
-
 class MyEnvironment:
     def __init__(self, environment_name: str, action = None, observation = None) -> None:
 
@@ -17,58 +16,46 @@ class MyEnvironment:
             self.bins = [np.linspace(-4.8, 4.8, self.n_bins), np.linspace(-4, 4, self.n_bins),
                 np.linspace(-0.418, 0.418, self.n_bins), np.linspace(-4, 4, self.n_bins)]
 
-
     # Returns the name of the environment
     def get_environment_name(self) -> str:   
         return self.environment.unwrapped.spec.id 
 
-
     def get_action_space(self):
         return self.environment.action_space
-
 
     def get_action_space_length(self):
         if 'CartPole' in self.environment_name:
             return 2
         return self.environment.action_space.n
 
-
     def get_observation_space(self):
         return self.environment.observation_space
-    
 
     def get_observation_space_length(self):
         if 'CartPole' in self.environment_name:
             return [self.n_bins+1] * len(self.environment.observation_space.high)
         return [self.environment.horizon + 1]
 
-
+    # Discretize the observation for CartPole.
     def set_observation(self, observation) -> None:
         self.observation = observation
         if 'CartPole' in self.environment_name:
-            # discretize the observation
             observation_index = []
             for i in range(len(self.get_observation_space().high)):
-                # subtract 1 to convert bin into index 
                 observation_index.append(np.digitize(self.observation[i], self.bins[i]) - 1)  
             self.observation = tuple(observation_index)
-
 
     def display_environment(self):
         plt.imshow(self.environment.render(mode = 'rgb_array'))
 
-
     def reset(self):
         return self.environment.reset()
-
 
     def step(self):
         return self.environment.step(self.action)
 
-
     def render(self):
         return self.environment.render()
-
 
     def close(self):
         self.environment.close()
@@ -90,7 +77,6 @@ class Agent:
         self.learning_rate = learning_rate
         self.gamma = gamma 
 
-
     # Returns an action based on 'epsilon 
     # greedy condition,' i.e., returns a 
     # uniformly sampled random action from 
@@ -103,7 +89,6 @@ class Agent:
         if np.random.uniform(1.0, 0.0) < self.epsilon[episode_number]: 
             return self.action_space.sample()
         return np.argmax(self.q_table[observation]) 
-
 
     # Estimates the optimal future Q-value
     # i.e., the maximum Q-value in next
@@ -172,7 +157,6 @@ def main():
         episode_count = 1 
         optimal_actions = 0  
         delta_update = [] 
-        # get the initial observation 
         observation = environment.reset()
         environment.set_observation(observation)
         observation = environment.observation 
@@ -180,7 +164,6 @@ def main():
 
         done = False
         while not done:
-            # display performance
             if episode_index % DISPLAY_FREQUENCY == 0:
                 if render_gym and ('CartPole' in environment.environment_name):
                     environment.display_environment()
@@ -210,7 +193,6 @@ def main():
 
     i_python_display.clear_output(wait = True)
     environment.close() 
-    # plot performance statistics
     plot_statistics(running_accuracy, running_delta)
 
     
@@ -230,6 +212,5 @@ if __name__ == "__main__":
     n_episodes = int(args['episodes'])
     learning_rate = float(args['alpha'])
     gamma = float(args['gamma'])
-
 
     main()
