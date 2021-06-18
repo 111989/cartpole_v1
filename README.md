@@ -14,7 +14,7 @@ Zachary Richardson's implementation.
 
 <img src="gifs/cartpole_genetic.gif" width = "300"><img src="output_plots/cartpole_genetic.jpg" width = "267.5">
 
-## Running the codes:
+## Running the codes
 
 python cartpole_q_learning.py
 python cartpole_q_learning.py --episodes 1000 --alpha 0.1 --gamma 0.95
@@ -22,5 +22,5 @@ python cartpole_q_learning.py --episodes 1000 --alpha 0.1 --gamma 0.95
 python cartpole_genetic.py
 python cartpole_genetic.py --generations 10 --steps 500 --population 20 --mutation 0.01
 
-## Dependency: 
+## Dependency
 Gym
