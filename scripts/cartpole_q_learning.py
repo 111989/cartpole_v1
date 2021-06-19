@@ -204,12 +204,9 @@ if __name__ == "__main__":
     
     #parse input arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--episodes', type = int, default = 10000, \
-        help = 'Number of steps in epsilon log-space, or iterations')
-    parser.add_argument('--alpha', type = float, default = 0.1, \
-        help = 'Learning rate')
-    parser.add_argument('--gamma', type = float, default = 0.95, \
-        help = 'Gamma parameter')
+    parser.add_argument('--episodes', type = int, default = 10000, help = 'Number of steps in epsilon log-space, or iterations')
+    parser.add_argument('--alpha', type = float, default = 0.1, help = 'Learning rate')
+    parser.add_argument('--gamma', type = float, default = 0.95, help = 'Gamma parameter')
     
     args = vars(parser.parse_args())
     n_episodes = int(args['episodes'])
