@@ -159,11 +159,9 @@ def main():
 
     for generation in range(generations):
         cumulative_reward = 0.0
-
-        # run episode
-        # accumulate reward 
         for agent in population.agents:
  
+            # run episode
             observation = environment.reset()
             for _ in range(episode_length):
                 if render_gym and 'CartPole' in environment.environment_name: environment.render()
