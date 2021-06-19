@@ -134,34 +134,6 @@ class Population:
 
 
 
-def run_episode(environment, agent, episode_length: int, render_gym = False) -> float:
-    observation = environment.reset()
-    for _ in range(episode_length):
-        if render_gym and 'CartPole' in environment.environment_name: environment.render()
-        action = agent.act(observation)
-        environment.action = action
-        observation, reward, done, _ = environment.step()
-        agent.fitness += reward
-        if done: break
-    return agent.fitness
-
-
-
-# Generates the next generation of the 
-# population by means of evolution, and
-# sets them as the new agents.
-def generate_next_generation(population) -> None:
-
-    next_generation = []
-    cumulative_fitness = population.get_cumulative_fitness()
-    while(len(next_generation) < population_count):
-        parent1, parent2 = population.get_parents(cumulative_fitness)
-        successor = population.mutate_successor(parent1, parent2, population.get_successor())
-        next_generation.append(successor)
-    population.agents = next_generation
-
-
-
 def plot_statistics(running_accuracy: float) -> None:
     plt.plot(running_accuracy)
     plt.xlabel(xlabel = 'Generation')
@@ -187,10 +159,20 @@ def main():
 
     for generation in range(generations):
         cumulative_reward = 0.0
+
+        # run episode
+        # accumulate reward 
         for agent in population.agents:
  
-            # accumulate reward 
-            agent.fitness = run_episode(environment, agent, episode_length, render_gym) 
+            observation = environment.reset()
+            for _ in range(episode_length):
+                if render_gym and 'CartPole' in environment.environment_name: environment.render()
+                action = agent.act(observation)
+                environment.action = action
+                observation, reward, done, _ = environment.step()
+                agent.fitness += reward
+                if done: break 
+
             cumulative_reward += agent.fitness
 
         # Calculate average fitness of the generation 
@@ -199,7 +181,17 @@ def main():
         generation_fitness = cumulative_reward / population_count
         print("Generation: %4d | Average Fitness: %2.0f" % (generation + 1, generation_fitness))
         running_accuracy.append(generation_fitness)
-        generate_next_generation(population)
+
+        # Generate the next generation of the 
+        # population by means of evolution, and
+        # set them as the new agents.
+        next_generation = []
+        cumulative_fitness = population.get_cumulative_fitness()
+        while(len(next_generation) < population_count):
+            parent1, parent2 = population.get_parents(cumulative_fitness)
+            successor = population.mutate_successor(parent1, parent2, population.get_successor())
+            next_generation.append(successor)
+        population.agents = next_generation
 
     environment.close()
     plot_statistics(running_accuracy)
@@ -210,14 +202,10 @@ if __name__ == "__main__":
     
     # parse input arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--generations', type = int, default = 10, \
-        help = 'Number of generations')
-    parser.add_argument('--steps', type = int, default = 500, \
-        help = 'Episode length')
-    parser.add_argument('--population', type = int, default = 20, \
-        help = 'Population count')
-    parser.add_argument('--mutation', type = float, default = 0.01, \
-        help = 'Mutation rate')
+    parser.add_argument('--generations', type = int, default = 10, help = 'Number of generations')
+    parser.add_argument('--steps', type = int, default = 500, help = 'Episode length')
+    parser.add_argument('--population', type = int, default = 20, help = 'Population count')
+    parser.add_argument('--mutation', type = float, default = 0.01, help = 'Mutation rate')
     
     args = vars(parser.parse_args())
     generations = int(args['generations'])
