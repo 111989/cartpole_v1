@@ -148,7 +148,6 @@ def main():
     running_length = 5 
     running_delta, running_accuracy = [], [] 
     render_gym = True
-
     
     # Track the number of episodes completed
     # (episode_count), the number of actions 
@@ -163,8 +162,7 @@ def main():
         observation = environment.reset()
         environment.set_observation(observation)
         observation = environment.observation 
-
-
+        
         done = False
         while not done:
             if episode_index % DISPLAY_FREQUENCY == 0:
@@ -173,7 +171,7 @@ def main():
                     i_python_display.clear_output(wait = True)
                     i_python_display.display(plt.gcf())
 
-
+            # run episode
             action = agent.act(observation, episode_index) 
             environment.action = action
             next_observation, reward, done, _ = environment.step()
@@ -181,18 +179,16 @@ def main():
             next_observation = environment.observation
             delta_update.append(agent.update(observation, action, next_observation, reward)) 
             observation = next_observation 
-
             optimal_actions += int(reward > 0.0)
             episode_count += 1
 
-
         # compute performance statistics and display performance
-        running_delta.append(sum(delta_update).item()) # latest update
-        running_accuracy.append(optimal_actions/episode_count) # latest accuracy
+        # break if any termination criteria are satisfied  
+        running_delta.append(sum(delta_update).item()) 
+        running_accuracy.append(optimal_actions/episode_count) 
         print('episode = {}, epsilon = {}, cumulative delta = {}, accuracy = {} \n'.format(episode_index, agent.epsilon[episode_index], running_delta[episode_index], running_accuracy[-1]))
-        
-        if (episode_index >= n_episodes + running_length ) or (all([accuracy == 1.0 for accuracy in running_accuracy]) and all([delta < 0.0001 for delta in running_delta]) and episode_index >= running_length): break
-
+        if (episode_index >= n_episodes + running_length ) or (all([accuracy == 1.0 for accuracy in running_accuracy]) and all([delta < 0.0001 for delta in running_delta]) and episode_index >= running_length): 
+            break
 
     i_python_display.clear_output(wait = True)
     environment.close() 
