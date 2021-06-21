@@ -5,7 +5,7 @@ specifically employing Epsilon-Greedy strategy for Q-Learning.
 Refer to q_learning.pdf for more information about
 Q-Learning.
 
-| Q-Learning Cartpole-v1 | Output Plot | 
+| Q-Learning | Output Plot | 
 | ------------- |:-------------:|
 | ![cartpole-q_learning](gifs/cartpole_q_learning.gif) | <img src="output_plots/cartpole_q_learning.jpg"> |
 
@@ -14,7 +14,7 @@ Genetic Algorithm/ Neural Network implementation for
 balancing CartPole-v1 from OpenAI Gym, based on 
 Zachary Richardson's implementation.
 
-| Genetic Cartpole-v1 | Output Plot | 
+| Genetic | Output Plot | 
 | ------------- |:-------------:|
 | ![cartpole-genetic](gifs/cartpole_genetic.gif) | <img src="output_plots/cartpole_genetic.jpg"> |
 
