@@ -7,7 +7,7 @@ Q-Learning.
 
 | Q-Learning CartPole-v1 | Output Plot | 
 | ------------- |:-------------:|
-| ![cartpole-q_learning](gifs/cartpole_q_learning.gif) | <img src="output_plots/cartpole_q_learning.jpg"> |
+| ![cartpole-q_learning](gifs/cartpole_q_learning.gif) | <img src="outputs/cartpole_q_learning.jpg"> |
 
 ## CartPole_Genetic
 Genetic Algorithm/ Neural Network implementation for 
@@ -16,7 +16,7 @@ Zachary Richardson's implementation.
 
 | Genetic CartPole-v1 | Output Plot | 
 | ------------- |:-------------:|
-| ![cartpole-genetic](gifs/cartpole_genetic.gif) | <img src="output_plots/cartpole_genetic.jpg"> |
+| ![cartpole-genetic](gifs/cartpole_genetic.gif) | <img src="outputs/cartpole_genetic.jpg"> |
 
 ## Running the codes
 
