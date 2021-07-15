@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class MyEnvironment:
-    def __init__(self, environment_name: str, action = None, observation = None) -> None:
+    def __init__(self, environment_name: str, action = None, observation = None):
 
         self.environment_name = environment_name
         self.environment = gym.make(self.environment_name)
