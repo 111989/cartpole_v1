@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 # NN Agent
 class Agent:
-    def __init__(self, observation_space: int, action_space_length: int) -> None:
+    def __init__(self, observation_space: int, action_space_length: int):
 
         self.observation_space = observation_space
         self.action_space_length = action_space_length
